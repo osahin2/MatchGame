@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Audio;
+using System;
 using UnityEngine;
 namespace Item
 {
@@ -8,9 +9,14 @@ namespace Item
         {
         }
 
-        public override void Interact(Action onSuccess)
+        public override void Interact()
         {
-            Debug.Log("Balloon Interact");
+            ShakeAnim();
+        }
+
+        public override void Pop()
+        {
+            Audio.Play(ClipType.Balloon);
         }
     }
 }

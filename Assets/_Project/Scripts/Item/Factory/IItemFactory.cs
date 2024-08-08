@@ -1,8 +1,11 @@
-﻿namespace Item
+﻿using Power;
+
+namespace Item
 {
     public interface IItemFactory
     {
-        IItem Get(ItemType itemType);
-        void Free(IItem item);
+        IItem GetItem(ItemType itemType);
+        IItem GetPowerItem(PowerType powerType);
+        void FreeItem(IItem item);
     }
 }

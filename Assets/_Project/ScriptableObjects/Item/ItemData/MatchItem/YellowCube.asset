@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: YellowCube
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: ac9e7db4f9e7ad74b878c777af54d810, type: 3}
+  _itemColor: {r: 0.9803922, g: 0.9450981, b: 0.27450982, a: 1}
   _itemType: 0
   _isPoppable: 1
+  _isPower: 0

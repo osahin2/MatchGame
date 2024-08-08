@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: RedCube
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 94018258c6e2246419fff673bf8481e2, type: 3}
+  _itemColor: {r: 0.9843138, g: 0.10196079, b: 0.10196079, a: 1}
   _itemType: 0
   _isPoppable: 1
+  _isPower: 0

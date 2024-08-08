@@ -1,26 +1,28 @@
-﻿using GridSystem;
-using Service_Locator;
+﻿using Audio;
 using System;
 using UnityEngine;
 namespace Item
 {
     public class Duck : SpecialItemBase
     {
-        private IGameBoard GameBoard => _gameBoard ??= ServiceProvider.Instance.Get<IGameBoard>();
-        private IGameBoard _gameBoard; 
         public override void CheckSpecial(Action onSuccess)
         {
             var gridPos = GameBoard.WorldToGrid(transform.position);
-            Debug.Log(gridPos);
             if (gridPos.y == 0)
             {
+                Audio.Play(ClipType.Duck);
                 onSuccess?.Invoke();
             }
         }
 
-        public override void Interact(Action onSuccess)
+        public override void Interact()
         {
-            Debug.Log("Duck Intereact");
+            ShakeAnim();
+        }
+
+        public override void Pop()
+        {
+
         }
     }
 }

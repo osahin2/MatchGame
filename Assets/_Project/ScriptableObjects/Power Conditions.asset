@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f155d9e0871f4a4f8cef1aea08a48d7, type: 3}
+  m_Name: Power Conditions
+  m_EditorClassIdentifier: 
+  _powerConditions:
+  - condition: 5
+    itemType: 3
+  _powerItemDataContainer: {fileID: 11400000, guid: 2877a90a487a004489ebd4f9d3171085, type: 2}

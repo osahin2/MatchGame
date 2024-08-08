@@ -3,8 +3,6 @@
 using GridSystem;
 using Item;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -47,12 +45,12 @@ namespace Level
 
 
 
-        private List<LevelGoal> _addedGoals = new();
+        private List<LevelGoalData> _addedGoals = new();
         private List<LevelEditorItemButton> _itemButtons = new();
         private LevelEditorItemButton _selectedButton;
         private List<LevelEditorGridItem> _spawnedItems = new();
         private List<LevelEditorItemButton> _spawnedFallItems = new();
-        private List<int> _fallItems = new();
+        private List<ItemData> _fallItems = new();
 
         private int _width;
         private int _height;
@@ -84,9 +82,9 @@ namespace Level
                     PutItemsToGrid();
                 }
             }
-            if(Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(1))
             {
-                if(_selectedButton != null)
+                if (_selectedButton != null)
                 {
                     _selectedButton.DeSelected();
                 }
@@ -106,7 +104,7 @@ namespace Level
 
             if (targetGridItem != null)
             {
-                if (targetGridItem.ID != _selectedButton.ItemID)
+                if (targetGridItem.ID != _selectedButton.ItemData.ID)
                 {
                     Destroy(targetGridItem.gameObject);
                     _spawnedItems.Remove(targetGridItem);
@@ -116,17 +114,17 @@ namespace Level
                     return;
                 }
             }
-            
+
 
             var item = Instantiate(_gridItem);
-            var itemData = _itemContainer.GetItemDataById(_selectedButton.ItemID);
+            var itemData = _selectedButton.ItemData;
             item.SpriteRenderer.sprite = itemData.Icon;
             item.ID = itemData.ID;
             item.GridPos = gridPos;
             item.ItemType = itemData.ItemType;
             var position = _gameBoard.GridToWorldCenter(gridPos);
             item.transform.position = position;
-            
+
             _spawnedItems.Add(item);
         }
 
@@ -135,7 +133,7 @@ namespace Level
             foreach (var item in _itemContainer.Items)
             {
                 var button = Instantiate(_buttonPrefab, _selectItemParent);
-                button.Construct(item.Icon, item.ID);
+                button.Construct(item);
                 _itemButtons.Add(button);
             }
         }
@@ -154,10 +152,10 @@ namespace Level
             if (_selectedButton == null)
                 return;
             var item = Instantiate(_buttonPrefab, _addedFallItemsContainer);
-            var itemData = _itemContainer.GetItemDataById(_selectedButton.ItemID);
-            item.Construct(itemData.Icon, itemData.ID);
+            var itemData = _selectedButton.ItemData;
+            item.Construct(itemData);
             _spawnedFallItems.Add(item);
-            _fallItems.Add(item.ItemID);
+            _fallItems.Add(itemData);
         }
         private void OnClearFallItemsClicked()
         {
@@ -201,8 +199,7 @@ namespace Level
                 var levelGridData = new LevelGridData
                 {
                     GridPosition = item.GridPos,
-                    ID = _selectedButton.ItemID,
-                    ItemType = item.ItemType,
+                    itemData = _itemContainer.GetItemDataById(item.ID),
                 };
 
                 levelData.LevelGridData.Add(levelGridData);
@@ -212,7 +209,7 @@ namespace Level
         }
         private void OnItemButtonClicked(LevelEditorItemButton button)
         {
-            if(_selectedButton != null && _selectedButton.ItemID != button.ItemID)
+            if (_selectedButton != null && _selectedButton.ItemData != button.ItemData)
             {
                 _selectedButton.DeSelected();
             }
@@ -224,22 +221,22 @@ namespace Level
             _width = int.Parse(_widthInput.text);
             _height = int.Parse(_heightInput.text);
 
-            _gameBoard.Construct(_width, _height);
+            _gameBoard.Init(_width, _height);
         }
         private void OnAddGoalClicked()
         {
             var itemName = _levelGoalsDropdown.options[_levelGoalsDropdown.value].text;
             var targetItem = _itemContainer.Items.Find(x => x.name.Equals(itemName));
             var goalCount = int.Parse(_levelGoal.text);
-            var goal = new LevelGoal 
-            { 
-                ID =  targetItem.ID,
+            var goal = new LevelGoalData
+            {
+                itemData = targetItem,
                 Goal = goalCount
             };
 
             _addedGoals.Add(goal);
         }
     }
-#endif
 }
+#endif
 

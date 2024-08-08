@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: GreenCube
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 346eff3b3c1c8394d833ffa1e1d069e9, type: 3}
+  _itemColor: {r: 0.5254902, g: 0.8980393, b: 0.29803923, a: 1}
   _itemType: 0
   _isPoppable: 1
+  _isPower: 0

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 using Utilities;
 namespace GridSystem
 {
@@ -12,6 +11,7 @@ namespace GridSystem
         [SerializeField] private float _slotSize;
         [Header("Grid Border")]
         [SerializeField] private SpriteRenderer _gridBorder;
+        [SerializeField] private Vector2 _defaultSize;
 
         private IGridSlot[,] _gridSlots;
 
@@ -25,14 +25,21 @@ namespace GridSystem
 
         private Vector3 _origin;
 
-        public void Construct(int width = 0, int heigth = 0)
+        public void Init(int width = 0, int heigth = 0)
         {
             _gridWidth = width == 0 ? _gridWidth : width;
             _gridHeight = heigth == 0 ? _gridHeight : heigth;
 
             _gridSlots = new IGridSlot[_gridWidth, _gridHeight];
+            GridSlots1D = new List<IGridSlot>();
             CreateGrid();
             AdjustBorderToGrid();
+        }
+        public void DeInit()
+        {
+            _gridBorder.size = _defaultSize;
+            _gridSlots = null;
+            GridSlots1D.Clear();
         }
         private void CreateGrid()
         {
@@ -71,9 +78,6 @@ namespace GridSystem
         {
             var x = Mathf.FloorToInt((worldPosition - _origin).x / _slotSize);
             var y = Mathf.FloorToInt((worldPosition - _origin).y / _slotSize);
-
-            if (!GridUtility.IsPositionOnGrid(new Vector2Int(x,y), _gridWidth, _gridHeight))
-                return new Vector2Int(-1000, -1000);
 
             return new Vector2Int(x, y);
         }

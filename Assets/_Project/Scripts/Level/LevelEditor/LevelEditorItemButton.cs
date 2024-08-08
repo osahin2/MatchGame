@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Item;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,12 +11,12 @@ namespace Level
         [SerializeField] private Button _button;
         [SerializeField] private float _selectedScale = 1.3f;
 
-        public int ItemID {  get; private set; }
+        public ItemData ItemData {  get; private set; }
 
-        public void Construct(Sprite icon, int id)
+        public void Construct(ItemData itemData)
         {
-            _button.image.sprite = icon;
-            ItemID = id;
+            ItemData = itemData;
+            _button.image.sprite = itemData.Icon;
         }
         public void Selected()
         {

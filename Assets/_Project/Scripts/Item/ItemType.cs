@@ -4,6 +4,7 @@
     {
         MatchItem,
         Duck,
-        Balloon
+        Balloon,
+        Rocket
     }
 }

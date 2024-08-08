@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Balloon
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 9069602c81819ec43809f27faa4550de, type: 3}
+  _itemColor: {r: 0, g: 0, b: 0, a: 0}
   _itemType: 2
   _isPoppable: 1
+  _isPower: 0

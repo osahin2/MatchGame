@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Duck
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 036e133ceefa20d4fbeda0c0e2ccc950, type: 3}
+  _itemColor: {r: 0, g: 0, b: 0, a: 0}
   _itemType: 1
   _isPoppable: 0
+  _isPower: 0
