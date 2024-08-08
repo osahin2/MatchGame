@@ -3248,7 +3248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 1611257856}
-  _editLevelData: {fileID: 11400000, guid: 3d891a876978b1547a7e28a50a545f75, type: 2}
+  _editLevelData: {fileID: 0}
   _levelDataCreateButton: {fileID: 1181594089}
   _levelName: {fileID: 71284976}
   _dataPath: Assets/_Project/ScriptableObjects/Level/
